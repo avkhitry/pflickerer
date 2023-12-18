@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Prophantasia Trainer</title>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: #FFFFFF;
+    font-family: Arial, sans-serif;
+    color: #000000;
+    cursor: pointer; /* Indicates the entire body is clickable */
+  }
+
+  #character {
+    font-size: 480px;
+    margin-top: 20px;
+    display: block; /* Ensures the span takes up space even when empty */
+    height: 480px; /* Reserve space for the character to prevent layout shifts */
+    line-height: 480px; /* Center the character vertically */
+    text-align: center; /* Center the character horizontally */
+  }
+</style>
+</head>
+<body>
+  <span id="character">☀︎</span> <!-- Initial character displayed -->
+
+  <script>
+    const characters = ['☀︎','☂︎','★','☻','♠︎','♣︎','♥︎','♦︎','♚','♛','♜','♝','♞','✚','⚑','☘︎','☗','☯︎','☸︎','⚉','✦','⚒︎','⚗︎','⚙︎'];
+    const characterElement = document.getElementById('character');
+    let previousCharacter = "☀︎";
+
+    function generateRandomColor() {
+      const hue = Math.floor(Math.random() * 360);
+      return `hsl(${hue}, 100%, 50%)`;
+    }
+
+    function changeCharacter() {
+      let newCharacter;
+      do {
+        newCharacter = characters[Math.floor(Math.random() * characters.length)];
+      } while (newCharacter === previousCharacter);
+
+      previousCharacter = newCharacter;
+      characterElement.innerText = newCharacter;
+      characterElement.style.color = generateRandomColor();
+      document.body.style.backgroundColor = generateRandomColor();
+
+      setTimeout(() => {
+        characterElement.innerText = '';
+        document.body.style.backgroundColor = '#FFFFFF'; // Reset background to white
+      }, 250); // Hides the character after 250ms
+    }
+
+    document.body.onclick = function() {
+      changeCharacter();
+    };
+  </script>
+</body>
+</html>
+
